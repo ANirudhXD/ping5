@@ -1,0 +1,51 @@
+ping5 - Strategy Reference (Condensed)
+
+Purpose
+- Single-page reference of final technical strategy and boundaries.
+
+Final architecture
+- Backend: FastAPI
+- Frontend: static HTML/CSS/JS
+- Data: SQLite
+- Runtime: in-process scheduler + API in one service
+- Local orchestration: Docker Compose
+- Cloud target: GCP (Compute Engine VM for MVP)
+
+Public API surface
+1. POST /api/v1/urls
+2. GET /api/v1/urls
+3. GET /api/v1/urls?refresh=true (manual immediate cycle)
+
+Core behavior
+1. User registers URL.
+2. URL normalized and stored.
+3. Scheduler runs at minute boundaries.
+4. Each check writes status code, response time, timestamp, status, and error.
+5. Dashboard polls latest status snapshots every 60 seconds.
+
+Data model
+1. monitored_urls: source of targets
+2. health_checks: append-only check history
+
+Policy decisions
+- Up: HTTP 2xx/3xx
+- Down: HTTP 4xx/5xx and network/timeout/SSL errors
+- URL validation: http/https only
+- Duplicate policy: normalized URL uniqueness
+- Timezone: IST in emitted timestamps
+
+Container strategy
+- One container/service for API + scheduler.
+- DB persisted via named volume at /app/data/monitor.db.
+- Uvicorn workers fixed to 1 to avoid duplicate scheduler loops.
+
+Explicitly deferred
+- Public history endpoints
+- Multi-instance scaling
+- Managed DB migration
+- Enterprise security/compliance hardening
+
+Related docs
+- Execution timeline: docs/journal.txt
+- Run instructions: docs/helper.txt
+- Cloud plan: CLOUD_SKETCH.md

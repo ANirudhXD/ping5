@@ -1,0 +1,28 @@
+ping5 - Helper Guide
+
+Purpose
+- Quick run and verify instructions for reviewers.
+
+Prerequisites
+- Docker Desktop installed and running.
+
+Run
+1. Open terminal in repo root.
+2. Start:
+   - docker compose up --build -d
+3. Open:
+   - http://127.0.0.1:8000/
+
+Verify
+1. Add healthy URL: https://example.com
+2. Add broken URL: http://nonexistent.invalid
+3. Click Manual Check Cycle.
+4. Confirm healthy = UP, broken = DOWN.
+
+Stop
+- Keep data: `docker compose down`
+- Remove data: `docker compose down -v`
+
+Persistence
+- Volume: `ping5_ping5_data`
+- DB path in container: `/app/data/monitor.db`

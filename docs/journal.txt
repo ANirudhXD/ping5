@@ -1,0 +1,33 @@
+ping5 - Build Journal (Condensed)
+
+Purpose
+- Brief implementation timeline and key decisions.
+
+2026-06-07: Scope and architecture locked
+- Backend-first MVP.
+- Final stack: FastAPI + SQLite + static HTML/CSS/JS.
+- Public API kept minimal: POST /api/v1/urls and GET /api/v1/urls.
+
+2026-06-07: Backend implemented
+- URL registration, scheduler loop, and latest-status read path completed.
+- History persistence implemented via health_checks table.
+
+2026-06-07: Frontend implemented
+- Static dashboard with table rendering, auto refresh (60s), and manual check cycle.
+- Add URL panel with toggle interaction.
+
+2026-06-07: Reliability and behavior corrections
+- Scheduler aligned to whole-minute boundaries.
+- Manual refresh changed to run immediate check cycle before returning data.
+- IST timestamp standardization applied.
+
+2026-06-08: Containerization finalized
+- Added Dockerfile, docker-compose.yml, and .dockerignore.
+- Addressed corporate TLS build issues in Docker build path.
+- Fixed SQLite volume ownership/persistence path by moving DB mount to /app/data.
+
+2026-06-08: Submission cleanup
+- Swagger/OpenAPI routes disabled for final package.
+- Temporary backend helper scripts removed.
+- Docs reorganized to docs/helper.txt, docs/journal.txt, and docs/plan_ref.txt.
+- Added README.md, AI_LOG.md, and CLOUD_SKETCH.md for final submission.
