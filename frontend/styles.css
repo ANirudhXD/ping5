@@ -210,7 +210,7 @@ button:hover,
 }
 
 .table-panel::before {
-    content: "60s live sweep";
+    content: "WATCHDOG ACTIVE";
     position: absolute;
     top: -14px;
     right: 22px;
