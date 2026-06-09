@@ -9,6 +9,7 @@ services:
     environment:
       REQUEST_VERIFY_TLS: "false"
       MONITOR_DB_PATH: "/app/data/monitor.db"
+      SLOW_WARNING_THRESHOLD_MS: "2000"
     volumes:
       - ping5_data:/app/data
     restart: unless-stopped
