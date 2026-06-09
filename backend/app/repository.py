@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import os
 import sqlite3
 from typing import Any
 
 from app.db import get_connection
 from app.utils import current_ist_timestamp
+
+SLOW_WARNING_THRESHOLD_MS = int(os.getenv("SLOW_WARNING_THRESHOLD_MS", "2000"))
 
 
 def create_monitored_url(url: str, normalized_url: str, name: str | None) -> dict[str, Any] | None:
@@ -116,12 +119,17 @@ def list_urls_with_latest_status() -> list[dict[str, Any]]:
         }
 
         if row["checked_at"] is not None:
+            response_time_ms = row["response_time_ms"]
             item["latest"] = {
                 "status": row["status"],
                 "status_code": row["status_code"],
-                "response_time_ms": row["response_time_ms"],
+                "response_time_ms": response_time_ms,
                 "checked_at": row["checked_at"],
                 "error": row["error"],
+                "slow_alert": (
+                    response_time_ms is not None
+                    and response_time_ms >= SLOW_WARNING_THRESHOLD_MS
+                ),
             }
 
         result.append(item)
