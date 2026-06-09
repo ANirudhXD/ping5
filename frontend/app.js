@@ -43,6 +43,7 @@ function renderRows(items) {
         const statusLabel = latest ? status.toUpperCase() : "PENDING";
         const code = latest?.status_code ?? "-";
         const responseTime = latest?.response_time_ms != null ? `${latest.response_time_ms} ms` : "-";
+        const warningSymbol = latest?.slow_alert ? '<span class="warn-symbol" title="Slow response">⚠</span>' : "";
         const checkedAt = latest?.checked_at ?? "Waiting for first check";
         const error = latest?.error ?? "-";
 
@@ -52,7 +53,7 @@ function renderRows(items) {
                 <td class="url-text">${escapeHtml(item.url)}</td>
                 <td><span class="status-pill ${statusClass}">${escapeHtml(statusLabel)}</span></td>
                 <td>${escapeHtml(code)}</td>
-                <td>${escapeHtml(responseTime)}</td>
+                <td>${escapeHtml(responseTime)} ${warningSymbol}</td>
                 <td>${escapeHtml(checkedAt)}</td>
                 <td class="error-text">${escapeHtml(error)}</td>
             </tr>
