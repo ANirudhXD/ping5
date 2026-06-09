@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ping5</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <div class="hero-badge-row">
+                <p class="eyebrow">ping5</p>
+                <span class="micro-badge">mvp status board</span>
+            </div>
+            <h1>ping5</h1>
+            <p class="subtitle">A minimal uptime dashboard with a slightly unhinged control-room vibe. Add a URL, let the monitor cycle run, and watch the board refresh every minute.</p>
+            <div class="hero-actions">
+                <button id="refreshButton" class="secondary-button" type="button">Manual Check Cycle</button>
+            </div>
+        </section>
+
+        <section class="panel table-panel">
+            <div class="panel-head">
+                <div>
+                    <h2>Current Status Grid</h2>
+                    <p class="panel-copy">Timestamps are shown in IST. Automatic checks run at every whole minute boundary. Manual check cycle can be triggered anytime. A ! marker indicates a slow response (&gt; 3000 ms).</p>
+                </div>
+                <div class="panel-tools">
+                    <button id="toggleAddPanel" class="plus-button" type="button" aria-expanded="false" aria-controls="addUrlPanel">+</button>
+                    <p id="lastUpdated" class="muted">Waiting for data...</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>URL</th>
+                            <th>Status</th>
+                            <th>Code</th>
+                            <th>Response Time</th>
+                            <th>Checked At</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statusTableBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">No URLs registered yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="addUrlPanel" class="panel form-panel is-collapsed">
+            <div>
+                <h2>Add URL</h2>
+                <p class="panel-copy">Secondary control panel. Register new targets here and then trigger Manual Check Cycle or wait for the next minute tick.</p>
+            </div>
+            <form id="urlForm" class="url-form">
+                <label>
+                    <span>Name</span>
+                    <input id="nameInput" name="name" type="text" placeholder="Google" maxlength="120">
+                </label>
+                <label>
+                    <span>URL</span>
+                    <input id="urlInput" name="url" type="url" placeholder="https://www.google.com/" required>
+                </label>
+                <button class="primary-button" type="submit">Add URL</button>
+            </form>
+            <p id="formMessage" class="form-message" role="status"></p>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
