@@ -21,6 +21,7 @@ class LatestStatus(BaseModel):
     response_time_ms: int | None = None
     checked_at: str
     error: str | None = None
+    slow_alert: bool = False
 
 
 class URLDashboardItem(BaseModel):
