@@ -210,7 +210,7 @@ button:hover,
 }
 
 .table-panel::before {
-    content: "WATCHDOG ACTIVE";
+    content: "60s live sweep";
     position: absolute;
     top: -14px;
     right: 22px;
@@ -304,6 +304,11 @@ tbody tr:hover {
 .status-down {
     background: var(--danger-bg);
     color: var(--danger);
+}
+
+.warn-symbol {
+    color: var(--pop);
+    font-weight: 700;
 }
 
 .url-text {
