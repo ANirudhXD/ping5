@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ping5</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <div class="hero-badge-row">
+                <p class="eyebrow">ping5</p>
+                <span class="micro-badge">minute watchdog</span>
+            </div>
+            <h1>ping5</h1>
+            <p class="subtitle">Keep an eye on your URLs without babysitting them.
+Add an endpoint, sit back, and let ping5 run its 60-second patrol. Fast, lightweight, and just paranoid enough.</p>
+            <div class="hero-actions">
+                <button id="refreshButton" class="secondary-button" type="button">Run Check Now</button>
+            </div>
+        </section>
+
+        <section class="panel table-panel">
+            <div class="panel-head">
+                <div>
+                    <h2>Mission Control</h2>
+                    <p class="panel-copy">Live endpoint health, response times, and failures. Updated every 60 seconds.</p>
+                </div>
+                <div class="panel-tools">
+                    <button id="toggleAddPanel" class="plus-button" type="button" aria-expanded="false" aria-controls="addUrlPanel">+</button>
+                    <p id="lastUpdated" class="muted">Waiting for data...</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>URL</th>
+                            <th>Status</th>
+                            <th>Code</th>
+                            <th>Response Time</th>
+                            <th>Checked At</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statusTableBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">All quiet. Add a URL to begin monitoring.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="addUrlPanel" class="panel form-panel is-collapsed">
+            <div>
+                <h2>Add a Target</h2>
+                <p class="panel-copy">Drop in a URL and ping5 will start watching it on the next sweep.</p>
+            </div>
+            <form id="urlForm" class="url-form">
+                <label>
+                    <span>Display Name</span>
+                    <input id="nameInput" name="name" type="text" placeholder="Google" maxlength="120">
+                </label>
+                <label>
+                    <span>Endpoint URL</span>
+                    <input id="urlInput" name="url" type="url" placeholder="https://www.google.com/" required>
+                </label>
+                <button class="primary-button" type="submit">Start Monitoring</button>
+            </form>
+            <p id="formMessage" class="form-message" role="status"></p>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
